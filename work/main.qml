@@ -10,6 +10,7 @@ ApplicationWindow {
     color: 'black'
     title: qsTr("Hello World")
     property int item_width: 250
+    property int item_height: 60
 
     header: Rectangle {
         id: rect_header
@@ -140,7 +141,7 @@ ApplicationWindow {
 
         SwipeView {
             id: swipeView
-            currentIndex: tabBar.currentIndex
+            currentIndex: 1
             anchors.bottomMargin: 40
             anchors.leftMargin: 0
             anchors.top: parent.top
@@ -165,9 +166,9 @@ ApplicationWindow {
                     anchors.fill: parent
                     anchors.margins: 5
 
-                    Vibro { width: 995; drop_width: 250 }
-                    Hydro { width: 995; drop_width: 250 }
-                    Termo { width: 995; drop_width: 250 }
+                    Vibro { width: 995; drop_width: applicationWindow.item_width; drop_height: applicationWindow.item_height }
+                    Hydro { width: 995; drop_width: applicationWindow.item_width; drop_height: applicationWindow.item_height }
+                    Termo { width: 995; drop_width: applicationWindow.item_width; drop_height: applicationWindow.item_height }
                 }
             }
 

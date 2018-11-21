@@ -2,10 +2,11 @@ import QtQuick 2.0
 
 Item {
     property int drop_width: 250
+    property int drop_height: 60
 
     id: root
     width: 450
-    height: 130
+    height: 155
 
     Rectangle {
         id: rect_hydro
@@ -26,8 +27,8 @@ Item {
 
         Nest {
             id: nest_hydro
-            width: drop_width + 10
-            height: 70
+            width: drop_width + 4
+            height: drop_height + 4
             anchors.left: parent.left
             anchors.leftMargin: 5
             anchors.bottom: parent.bottom

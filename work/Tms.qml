@@ -16,6 +16,7 @@ Item {
             target: tile
             border.width: 3
             border.color: '#f0f0f0'
+            height: 120
         }
     }
 
@@ -28,6 +29,7 @@ Item {
 
         onDoubleClicked:  {
             is_selected = !is_selected;
+//            root.height = is_selected ? 120 : 60;
         }
         onReleased: {
             if (tile.Drag.target !== null) {
