@@ -3,49 +3,64 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 
 Item {
-    property int drop_width: 250
-    property int drop_height: 60
+    property bool is_connected: false
+    property bool is_active: false
+    property int cell_width: 100
+    property int cell_height: 28
 
-    width: 980
-    height: 155
+    id: root
+    width: 321
+    height: 180
+
     Rectangle {
-        id: rect_vibr
+        id: rectangle
         anchors.fill: parent
-        color: '#909090'
+        color: 'grey'
+        border.color: 'black'
+        border.width: 1
         radius: 5
 
-        Text {
-            x: 10
-            y: 10
-            text: 'Вибростол'
-            font.bold: false
-            font.pointSize: 12
+        Switch {
+            id: switch_connect
+            x: 0
+            y: 5
+            width: 152
+            height: 30
+            text: checked == false ? qsTr("Подключиться") : qsTr("Отключиться")
+            checked: root.is_connected
+
+            states: State {
+                when: switch_connect.checked
+                PropertyChanges { target: root; is_connected: true }
+                PropertyChanges { target: busyIndicator; running: true }
+            }
+        }
+        BusyIndicator {
+            id: busyIndicator
+            width: 40
+            height: 40
+            anchors.top: parent.top
+            anchors.topMargin: 0
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+            running: root.is_connected
+
         }
 
-        Nest {
-            id: nest_vibro
-            width: drop_width + 4
-            height: drop_height + 4
-            anchors.left: parent.left
-            anchors.leftMargin: 5
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 5
-        }
-
-        GridLayout {
-            property int cell_width: 100
-            property int cell_height: 30
-
+        Grid {
             id: grid
-            x: 326
-            y: 10
-            width: 321
-            height: 140
+            anchors.bottom: row_buttons.top
+            anchors.bottomMargin: 0
+            anchors.right: parent.right
+            anchors.rightMargin: 5
+            spacing: 3
+            rows: 4
+            columns: 3
 
 
             Rectangle {
-                width: grid.cell_width
-                height: grid.cell_height
+                width: root.cell_width
+                height: root.cell_height
                 Layout.column: 0
                 Layout.row: 0
                 Layout.fillWidth: false
@@ -55,8 +70,8 @@ Item {
                 border.width: 1
             }
             Rectangle {
-                width: grid.cell_width
-                height: grid.cell_height
+                width: root.cell_width
+                height: root.cell_height
                 Layout.column: 1
                 Layout.row: 0
                 Layout.fillWidth: false
@@ -65,14 +80,14 @@ Item {
                 border.color: '#000000'
                 border.width: 1
 
-                Text {
+                RadioButton {
                     text: qsTr("ось X")
                     anchors.centerIn: parent
                 }
             }
             Rectangle {
-                width: grid.cell_width
-                height: grid.cell_height
+                width: root.cell_width
+                height: root.cell_height
                 Layout.column: 2
                 Layout.row: 0
                 Layout.fillWidth: false
@@ -88,8 +103,8 @@ Item {
             }
 
             Rectangle {
-                width: grid.cell_width
-                height: grid.cell_height
+                width: root.cell_width
+                height: root.cell_height
                 Layout.column: 0
                 Layout.row: 1
                 Layout.fillWidth: false
@@ -104,8 +119,8 @@ Item {
                 }
             }
             Rectangle {
-                width: grid.cell_width
-                height: grid.cell_height
+                width: root.cell_width
+                height: root.cell_height
                 Layout.column: 1
                 Layout.row: 1
                 Layout.fillWidth: false
@@ -120,8 +135,8 @@ Item {
                 }
             }
             Rectangle {
-                width: grid.cell_width
-                height: grid.cell_height
+                width: root.cell_width
+                height: root.cell_height
                 Layout.column: 2
                 Layout.row: 1
                 Layout.fillWidth: false
@@ -137,8 +152,8 @@ Item {
             }
 
             Rectangle {
-                width: grid.cell_width
-                height: grid.cell_height
+                width: root.cell_width
+                height: root.cell_height
                 Layout.column: 0
                 Layout.row: 2
                 Layout.fillWidth: false
@@ -153,8 +168,8 @@ Item {
                 }
             }
             Rectangle {
-                width: grid.cell_width
-                height: grid.cell_height
+                width: root.cell_width
+                height: root.cell_height
                 Layout.column: 1
                 Layout.row: 2
                 Layout.fillWidth: false
@@ -169,8 +184,8 @@ Item {
                 }
             }
             Rectangle {
-                width: grid.cell_width
-                height: grid.cell_height
+                width: root.cell_width
+                height: root.cell_height
                 Layout.column: 2
                 Layout.row: 2
                 Layout.fillWidth: false
@@ -184,41 +199,40 @@ Item {
                     anchors.centerIn: parent
                 }
             }
-
-            Rectangle {
-                width: grid.cell_width
-                height: grid.cell_height
-                Layout.column: 1
-                Layout.row: 3
-                Layout.fillWidth: false
-                Layout.fillHeight: false
-                border.color: '#000000'
-                border.width: 1
-
-                Button {
-                    text: qsTr("замерить")
-                    anchors.fill: parent
-                }
-            }
-            Rectangle {
-                width: grid.cell_width
-                height: grid.cell_height
-                Layout.column: 2
-                Layout.row: 3
-                Layout.fillWidth: false
-                Layout.fillHeight: false
-                border.color: '#000000'
-                border.width: 1
-
-                Button {
-                    text: qsTr("замерить")
-                    anchors.fill: parent
-                }
-            }
-
-
         }
 
-    }
+        Row {
+            id: row_buttons
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 5
+            anchors.right: parent.right
+            anchors.rightMargin: 5
+            spacing: 4
+            Button {
+                id: btn_me
+                text: qsTr("замерить")
+                checkable: true
+                width: root.cell_width
+                height: 20
+            }
+            Button {
+                text: qsTr("замерить")
+                checkable: true
+                width: root.cell_width - 1
+                height: 20
+            }
+        }
 
+        RadioButton {
+            id: radioButton
+            x: 166
+            y: 16
+            height: 20
+            text: qsTr("Radio Button")
+            clip: false
+            indicator: Rectangle { width: 18; height: 18; radius: 18 }
+        }
+
+
+    }
 }

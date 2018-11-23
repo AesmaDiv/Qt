@@ -1,10 +1,12 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
-        <file>Tms.qml</file>
-        <file>Nest.qml</file>
-        <file>Vibro.qml</file>
-        <file>Hydro.qml</file>
-        <file>Termo.qml</file>
+        <file>_dnd/Nest.qml</file>
+        <file>_dnd/Tms.qml</file>
+        <file>_dnd/Tms.ui.qml</file>
+        <file>_pages/Hydro.qml</file>
+        <file>_pages/Termo.qml</file>
+        <file>_pages/Vibro.qml</file>
+        <file>_tests/Test_Hipot.qml</file>
+        <file>_tests/Test_Vibro.qml</file>
     </qresource>
 </RCC>

@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>_dnd/Nest.qml</file>
+        <file>_dnd/Tms.qml</file>
+        <file>_pages/Cold.qml</file>
+        <file>_pages/Hot.qml</file>
+        <file>_styled_widgets/XRadio.qml</file>
+        <file>_tests/Hipot.qml</file>
+        <file>_tests/Pressure.qml</file>
+        <file>_tests/Vibro.qml</file>
+    </qresource>
+</RCC>
